@@ -18,6 +18,7 @@ public class Cirkel extends Form {
     private int startX;
     private int startY;
     private boolean fylld;
+    
 
     @Override
     public double getArea() {
