@@ -32,7 +32,8 @@ public abstract class Main {
             System.out.println("4.Cirkel");
             System.out.println("0.Avsluta");
             val = input.nextInt();
-            System.out.print("hi");
+ 
+            
             switch (val) {
                 case 1:
                     skrivUt(formLista);
