@@ -20,7 +20,7 @@ public class FormerJPanel extends javax.swing.JPanel implements Runnable {
     private volatile Thread trad;
 
     ArrayList<Form> formlista = new ArrayList<>();  // skapa arraylist för att spara informatiobn
-     FileManager fmgr = new FileManager();
+    FileManager fmgr = new FileManager();
 
     private int width, height, radia;
     private int x, y;
@@ -71,6 +71,11 @@ public class FormerJPanel extends javax.swing.JPanel implements Runnable {
         });
 
         startbtn.setText("Start");
+        startbtn.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                startbtnItemStateChanged(evt);
+            }
+        });
         startbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 startbtnActionPerformed(evt);
@@ -201,6 +206,17 @@ public class FormerJPanel extends javax.swing.JPanel implements Runnable {
         //     FormerJPanel.getLocation(FormerJPanel.getLocation().x,FormerJPanel.getLocation().y-5 );
 
     }//GEN-LAST:event_startbtnActionPerformed
+
+    private void startbtnItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_startbtnItemStateChanged
+        if (evt.getStateChange() == 1) {
+            this.startbtn.setText("stop");
+            this.start();
+
+        } else {
+            this.startbtn.setText("start");
+            this.stop();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_startbtnItemStateChanged
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -251,16 +267,24 @@ public class FormerJPanel extends javax.swing.JPanel implements Runnable {
             trad = null;
         }
     }
+    // xPos  = 5;
 
     @Override
     public void run() {
         Thread thisThread = Thread.currentThread();
+        // for (xPos = 5; xPos < 3000; xPos += 5) {
+        //   repaint();
+
+        // }
         while (trad == thisThread) {
             try {
                 Thread.sleep(30);
             } catch (InterruptedException e) {
             }
             repaint();
+
         }
+        
+        x = x+100; 
     }
 }
