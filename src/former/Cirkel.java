@@ -30,7 +30,7 @@ public class Cirkel extends Form {
 
         this.radie = r;
         this.fylld = f;
-        Color color = new Color((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255));
+        color = new Color((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255));
     }
 
     @Override

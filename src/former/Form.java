@@ -41,6 +41,7 @@ public abstract class Form implements Serializable {
     }
 
     public void move(int x, int y) {
+        
     }
 
     public abstract double getArea();
