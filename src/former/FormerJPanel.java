@@ -6,8 +6,8 @@ package former;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+//import java.awt.event.MouseAdapter;
+//import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -19,37 +19,8 @@ public class FormerJPanel extends javax.swing.JPanel implements Runnable {
 
     private volatile Thread trad;
 
- 
-    private void start() {
-        if (trad == null) {
-            trad = new Thread(this);
-            trad.start();
-          //  this.running = true;
-        }
-    }
-        private void stop() {
-        if (trad != null) {
-        //    this.running = false;
-            trad = null;
-        }
-    }
-
-    @Override
-    public void run() {
-        Thread thisThread = Thread.currentThread();
-        while (trad == thisThread) {
-            try {
-                Thread.sleep(30);
-            } catch (InterruptedException e) {
-            }
-            repaint();
-        }
-    }
-
-
-
     ArrayList<Form> formlista = new ArrayList<>();  // skapa arraylist för att spara informatiobn
-    FileManager fmgr = new FileManager();
+     FileManager fmgr = new FileManager();
 
     private int width, height, radia;
     private int x, y;
@@ -266,4 +237,30 @@ public class FormerJPanel extends javax.swing.JPanel implements Runnable {
     private javax.swing.JRadioButton triangelrbtn;
     // End of variables declaration//GEN-END:variables
 
+    private void start() {
+        if (trad == null) {
+            trad = new Thread(this);
+            trad.start();
+            //  this.running = true;
+        }
+    }
+
+    private void stop() {
+        if (trad != null) {
+            //    this.running = false;
+            trad = null;
+        }
+    }
+
+    @Override
+    public void run() {
+        Thread thisThread = Thread.currentThread();
+        while (trad == thisThread) {
+            try {
+                Thread.sleep(30);
+            } catch (InterruptedException e) {
+            }
+            repaint();
+        }
+    }
 }
