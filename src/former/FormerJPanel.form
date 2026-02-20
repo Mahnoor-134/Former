@@ -35,9 +35,9 @@
               <Component id="cirkelrbtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               <Component id="rektangelrbtn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="startbtn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <Component id="startTbtn" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="rensebtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="Savebtn" min="-2" max="-2" attributes="0"/>
@@ -53,12 +53,12 @@
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="rensebtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="startbtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="triangelrbtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cirkelrbtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="rektangelrbtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Savebtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="hämtabtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="startTbtn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="457" max="32767" attributes="0"/>
           </Group>
@@ -72,14 +72,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rensebtnActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="startbtn">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Start"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="startbtnActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="triangelrbtn">
@@ -124,6 +116,15 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="h&#xe4;mtabtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JToggleButton" name="startTbtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="start"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="startTbtnItemStateChanged"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="startTbtnActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

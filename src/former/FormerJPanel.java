@@ -20,10 +20,16 @@ public class FormerJPanel extends javax.swing.JPanel implements Runnable {
     private volatile Thread trad;
 
     ArrayList<Form> formlista = new ArrayList<>();  // skapa arraylist för att spara informatiobn
-     FileManager fmgr = new FileManager();
+    FileManager fmgr = new FileManager();
 
     private int width, height, radia;
     private int x, y;
+    int i;
+    private Color color[] = new Color[100];
+     int xPox = 15;
+    int yPox1 = 75;
+    int yPox2 = 150;
+
 
     public int numPoints;
 
@@ -48,12 +54,12 @@ public class FormerJPanel extends javax.swing.JPanel implements Runnable {
         jButton6 = new javax.swing.JButton();
         rbtng1 = new javax.swing.ButtonGroup();
         rensebtn = new javax.swing.JButton();
-        startbtn = new javax.swing.JButton();
         triangelrbtn = new javax.swing.JRadioButton();
         cirkelrbtn = new javax.swing.JRadioButton();
         rektangelrbtn = new javax.swing.JRadioButton();
         Savebtn = new javax.swing.JButton();
         hämtabtn = new javax.swing.JButton();
+        startTbtn = new javax.swing.JToggleButton();
 
         jButton6.setText("jButton6");
 
@@ -67,13 +73,6 @@ public class FormerJPanel extends javax.swing.JPanel implements Runnable {
         rensebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rensebtnActionPerformed(evt);
-            }
-        });
-
-        startbtn.setText("Start");
-        startbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startbtnActionPerformed(evt);
             }
         });
 
@@ -106,6 +105,18 @@ public class FormerJPanel extends javax.swing.JPanel implements Runnable {
             }
         });
 
+        startTbtn.setText("start");
+        startTbtn.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                startTbtnItemStateChanged(evt);
+            }
+        });
+        startTbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startTbtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,9 +128,9 @@ public class FormerJPanel extends javax.swing.JPanel implements Runnable {
                 .addComponent(cirkelrbtn)
                 .addGap(42, 42, 42)
                 .addComponent(rektangelrbtn)
-                .addGap(18, 18, 18)
-                .addComponent(startbtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(31, 31, 31)
+                .addComponent(startTbtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rensebtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Savebtn)
@@ -133,12 +144,12 @@ public class FormerJPanel extends javax.swing.JPanel implements Runnable {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rensebtn)
-                    .addComponent(startbtn)
                     .addComponent(triangelrbtn)
                     .addComponent(cirkelrbtn)
                     .addComponent(rektangelrbtn)
                     .addComponent(Savebtn)
-                    .addComponent(hämtabtn))
+                    .addComponent(hämtabtn)
+                    .addComponent(startTbtn))
                 .addContainerGap(457, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -195,12 +206,37 @@ public class FormerJPanel extends javax.swing.JPanel implements Runnable {
 
     }//GEN-LAST:event_hämtabtnActionPerformed
 
-    private void startbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startbtnActionPerformed
+    private void startTbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startTbtnActionPerformed
+
         // TODO add your handling code here:
+    }//GEN-LAST:event_startTbtnActionPerformed
 
-        //     FormerJPanel.getLocation(FormerJPanel.getLocation().x,FormerJPanel.getLocation().y-5 );
+    private void startTbtnItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_startTbtnItemStateChanged
+        if (evt.getStateChange() == 1) {
+            this.startTbtn.setText("Stop");
+            this.start();
+        } else {
+            this.startTbtn.setText("Start");
+            this.stop();
+        }
 
-    }//GEN-LAST:event_startbtnActionPerformed
+    }//GEN-LAST:event_startTbtnItemStateChanged
+
+    public void start() {
+        if (trad == null) {
+            trad = new Thread(this);
+            trad.start();
+            //  this.running = true;
+        }
+    }
+
+    public void stop() {
+        if (trad != null) {
+            //    this.running = false;
+            trad = null;
+        }
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -233,34 +269,38 @@ public class FormerJPanel extends javax.swing.JPanel implements Runnable {
     private javax.swing.ButtonGroup rbtng1;
     private javax.swing.JRadioButton rektangelrbtn;
     private javax.swing.JButton rensebtn;
-    private javax.swing.JButton startbtn;
+    private javax.swing.JToggleButton startTbtn;
     private javax.swing.JRadioButton triangelrbtn;
     // End of variables declaration//GEN-END:variables
-
-    private void start() {
-        if (trad == null) {
-            trad = new Thread(this);
-            trad.start();
-            //  this.running = true;
-        }
-    }
-
-    private void stop() {
-        if (trad != null) {
-            //    this.running = false;
-            trad = null;
-        }
-    }
 
     @Override
     public void run() {
         Thread thisThread = Thread.currentThread();
+        float c = 0;
+        for (int i = 0; i < color.length; i++) {
+            color[i] = Color.getHSBColor(c, (float) 1.0, (float) 0.5);
+            c += 0.01;
+        }
         while (trad == thisThread) {
+            this.setForeground(color[i]);
+            xPox++;
+            yPox1++;
+            yPox2++;
+
+            repaint();
+            i++;
+
             try {
                 Thread.sleep(30);
             } catch (InterruptedException e) {
+                System.out.println("Tråden är inte igång. Fel:" + e.getMessage());
             }
-            repaint();
+
+            if (color.length == i) {
+                i = 0;
+            }
         }
+
     }
+
 }
