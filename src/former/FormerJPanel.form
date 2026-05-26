@@ -82,6 +82,9 @@
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="Triangel"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="triangelrbtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="cirkelrbtn">
       <Properties>

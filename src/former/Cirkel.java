@@ -30,13 +30,14 @@ public class Cirkel extends Form {
 
         this.radie = r;
         this.fylld = f;
-        Color color = new Color((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255));
+         color = new Color((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255));
     }
 
     @Override
     public void Draw(Graphics g) {
         g.setColor(color);
         g.fillOval(xPos, yPos, radie, radie);
+        //g.drawOval(xPos, yPos, radie, radie);
 
     }
 

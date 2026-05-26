@@ -21,6 +21,8 @@ public abstract class Form implements Serializable {
     protected boolean running;
     protected boolean positiveRiktning;
     protected Color color;
+    protected int dx = 3;
+    protected int dy = 3;
 
     public Form(int x, int y) {
         this.xPos = x;
@@ -40,7 +42,15 @@ public abstract class Form implements Serializable {
 
     }
 
-    public void move(int x, int y) {
+    public void move() {
+        xPos += dx;
+
+        // byt riktning höger/vänster
+        if (xPos > 500 || xPos < 0) {
+            dx = -dx;
+        }
+
+      
     }
 
     public abstract double getArea();
@@ -53,6 +63,6 @@ public abstract class Form implements Serializable {
 
         return this.getArea();
     }
-    
-   // public abstract double run();
+
+    // public abstract double run();
 }

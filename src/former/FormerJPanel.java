@@ -26,10 +26,9 @@ public class FormerJPanel extends javax.swing.JPanel implements Runnable {
     private int x, y;
     int i;
     private Color color[] = new Color[100];
-     int xPox = 15;
+    int xPox = 15;
     int yPox1 = 75;
     int yPox2 = 150;
-
 
     public int numPoints;
 
@@ -79,6 +78,11 @@ public class FormerJPanel extends javax.swing.JPanel implements Runnable {
         rbtng1.add(triangelrbtn);
         triangelrbtn.setSelected(true);
         triangelrbtn.setText("Triangel");
+        triangelrbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                triangelrbtnActionPerformed(evt);
+            }
+        });
 
         rbtng1.add(cirkelrbtn);
         cirkelrbtn.setText("Cirkel");
@@ -166,8 +170,6 @@ public class FormerJPanel extends javax.swing.JPanel implements Runnable {
         int mouseY = evt.getY();
         int b = (int) (Math.random() * 150);
         int h = (int) (Math.random() * 150);
-        //int b = (int) (Math.random() * 50) + 85;
-        //int h = (int) (Math.random() * 50) + 60;
         if (this.cirkelrbtn.isSelected()) {
 
             Form t = new Cirkel(mouseX - h / 2, mouseY - h / 2, h, true);
@@ -209,6 +211,7 @@ public class FormerJPanel extends javax.swing.JPanel implements Runnable {
     private void startTbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startTbtnActionPerformed
 
         // TODO add your handling code here:
+
     }//GEN-LAST:event_startTbtnActionPerformed
 
     private void startTbtnItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_startTbtnItemStateChanged
@@ -222,43 +225,62 @@ public class FormerJPanel extends javax.swing.JPanel implements Runnable {
 
     }//GEN-LAST:event_startTbtnItemStateChanged
 
-    public void start() {
-        if (trad == null) {
-            trad = new Thread(this);
-            trad.start();
-            //  this.running = true;
-        }
-    }
+    private void triangelrbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_triangelrbtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_triangelrbtnActionPerformed
 
-    public void stop() {
-        if (trad != null) {
-            //    this.running = false;
-            trad = null;
-        }
-    }
+        public void start() {
+            if (trad == null) {
+                trad = new Thread(this);
+                trad.start();
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        for (int i = 0; i < formlista.size(); i++) {
-            formlista.get(i).Draw(g);
+            }
         }
 
-    }
+        public void stop() {
+            if (trad != null) {
+                trad = null;
+            }
+        }
 
-    private Color randomColor() {
-        return new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
 
-    }
+            for (int i = 0; i < formlista.size(); i++) {
+                formlista.get(i).Draw(g);
+            }
 
-    private int randomPixel() {
-        //int pix = (int) (Math.random() * 400);
-        int randomNum = (int) (Math.random() * 301); // 0 to 100
-        //  return pix;
-        return randomNum;
-        // int x =(int) radom.math; 
-    }
+        }
+
+        @Override
+        public void run() {
+            Thread thisThread = Thread.currentThread();
+
+            while (trad == thisThread) {
+                for (int i = 0; i < formlista.size(); i++) {
+                    formlista.get(i).move();
+                }
+
+
+                repaint();
+
+                try {
+                    Thread.sleep(30);
+                } catch (InterruptedException e) {
+                    System.out.println("Tråden är inte igång. Fel:" + e.getMessage());
+                }
+
+                if (color.length == i) {
+                    i = 0;
+                }
+            }
+
+    
+        }
+    
+
+       
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -272,35 +294,5 @@ public class FormerJPanel extends javax.swing.JPanel implements Runnable {
     private javax.swing.JToggleButton startTbtn;
     private javax.swing.JRadioButton triangelrbtn;
     // End of variables declaration//GEN-END:variables
-
-    @Override
-    public void run() {
-        Thread thisThread = Thread.currentThread();
-        float c = 0;
-        for (int i = 0; i < color.length; i++) {
-            color[i] = Color.getHSBColor(c, (float) 1.0, (float) 0.5);
-            c += 0.01;
-        }
-        while (trad == thisThread) {
-            this.setForeground(color[i]);
-            xPox++;
-            yPox1++;
-            yPox2++;
-
-            repaint();
-            i++;
-
-            try {
-                Thread.sleep(30);
-            } catch (InterruptedException e) {
-                System.out.println("Tråden är inte igång. Fel:" + e.getMessage());
-            }
-
-            if (color.length == i) {
-                i = 0;
-            }
-        }
-
-    }
 
 }
